@@ -2,8 +2,9 @@ package com.example.teste3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-//import android.util.Log;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 public class Tela2 extends AppCompatActivity {
-    TextView nome,cpf,endereco;
+    TextView nome,cpf,endereco,dadoT1;
     RequestQueue filaRequest;
 
     String url="https://9nflln-3000.csb.app/tudo";
@@ -28,6 +29,12 @@ public class Tela2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela2);
         filaRequest = Volley.newRequestQueue(this);
+        dadoT1 = findViewById(R.id.textView3);
+        Intent intent = getIntent();
+        String dadoTela1 = intent.getStringExtra("nome");
+        dadoT1.setText(dadoTela1);
+        Teobaldo baldo = (Teobaldo)intent.getSerializableExtra("obj");
+        System.out.println("Aqui1: "+baldo.nomebaldo);
     }
     public void GetData(View view){
         System.out.println("Entrei Aqui!");
@@ -45,18 +52,19 @@ public class Tela2 extends AppCompatActivity {
                                     String nomeJ = jsonObj.get("nome").toString();
                                     String cpfJ = jsonObj.get("cpf").toString();
                                     String enderecoJ = jsonObj.get("endereco").toString();
-                                    System.out.println("Nome: " +nomeJ +" CPF: "+cpfJ+" Endereco: "+enderecoJ);
+                                    //System.out.println("Nome: " +nomeJ +" CPF: "+cpfJ+" Endereco: "+enderecoJ);
+                                    Log.d("Dados ","Nome: " +nomeJ +" CPF: "+cpfJ+" Endereco: "+enderecoJ);
                                     nome.setText(nomeJ);
                                     cpf.setText(cpfJ);
                                 } catch (JSONException e) {
-                                    //Log.e("Volley", "Erro no JSON");
-                                    System.out.println("Erro no JSON");
+                                    Log.e("Volley", "Erro no JSON");
+                                    //System.out.println("Erro no JSON");
                                 }
 
                             }
                         } else {
-                            //Log.e("Data","Sem Dados");
-                            System.out.println("Sem Dados");
+                            Log.e("Data","Sem Dados");
+                            //System.out.println("Sem Dados");
                         }
 
                     }
@@ -65,8 +73,8 @@ public class Tela2 extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        //Log.e("Volley", error.toString());
-                        System.out.println(error.toString());
+                        Log.e("Volley", error.toString());
+                        //System.out.println(error.toString());
                     }
                 });
         filaRequest.add(arrReq);

@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.Random;
 import android.os.Handler;
 
+
 public class MainActivity extends AppCompatActivity {
 
+    String nome="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         TextView texto = findViewById(R.id.textView2);
         texto.setText("Teste!");
         novoNumero();
+        PegarNome();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable(){
             @Override
@@ -32,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         },2000);
 
     }
+    public void PegarNome(){
+        TextView campoNome = findViewById(R.id.login);
+        TextView textoPrincipal = findViewById(R.id.textView);
+        nome = campoNome.getText().toString();
+        textoPrincipal.setText(nome);
+    }
+
 
     public void novoNumero(){
         TextView numero = findViewById(R.id.numero);
@@ -42,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     public void mudarTela()
     {
         Intent intent = new Intent(getApplicationContext(), Tela2.class);
+        intent.putExtra("nome", nome);
+        Teobaldo teo = new Teobaldo();
+        intent.putExtra("obj",teo);
         startActivity(intent);
     }
 }

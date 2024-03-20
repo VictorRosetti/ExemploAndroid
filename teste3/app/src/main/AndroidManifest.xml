@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!--Aula 2 - Pedindo permissão para usar internet-->
+    <!-- Aula 2 - Pedindo permissão para usar internet -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--Aula 2 - Pedindo permissão para usar internet-->
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Teste3"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Tela3"
+            android:exported="false" />
         <activity
             android:name=".Tela2"
             android:exported="false" />
